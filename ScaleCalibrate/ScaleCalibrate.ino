@@ -34,14 +34,14 @@ void setup(void)
   // Run through calibration process.
   Serial.println("Scale Calibration Sketch");
   Serial.println();
-  Serial.println("Type OK and press enter to start.");
+  Serial.println("Schreib OK und drücke Enter zum Starten.");
   while (!Serial.find("OK"));
   Serial.println();
-  Serial.println("Remove all weight from the scale, then type OK and press enter.");
+  Serial.println("Entferne alles von der Waage, tippe OK und drücke Enter.");
   while (!Serial.find("OK"));
   ZERO_OFFSET = readADC(ADC_PIN);
   Serial.println();
-  Serial.println("Place something on the scale and type its weight in grams, then press enter.");
+  Serial.println("Lege etwas auf die Waage und gebe das Gewicht in Gramm ein. Dann drücke Enter.");
   float grams = Serial.parseFloat();
   while (grams <= 0) {
     grams = Serial.parseFloat();
@@ -49,7 +49,7 @@ void setup(void)
   float measure = readADC(ADC_PIN) - ZERO_OFFSET;
   GRAMS_PER_MEASUREMENT = grams / measure;
   Serial.println();
-  Serial.println("Calibration finished!  Write down the following calibration values:");
+  Serial.println("Kalibrierung beendet!  Notiere folgende Kalibrierungswerte:");
   Serial.print("ZERO_OFFSET = ");
   Serial.println(ZERO_OFFSET, 5);
   Serial.print("GRAMS_PER_MEASUREMENT = ");
@@ -92,7 +92,7 @@ void loop(void)
   // Clamp sample value to 0.
   sample = sample < 0.0 ? 0.0 : sample;
   // Compute the weight and print it out.
-  Serial.print("Weight (grams): ");
+  Serial.print("Gewicht (Gramm): ");
   Serial.println(sample * GRAMS_PER_MEASUREMENT, 1);
   // Wait until it's time for the next sample.
   delay(SAMPLE_PERIOD_MS);
